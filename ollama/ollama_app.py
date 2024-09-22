@@ -1,24 +1,16 @@
-import streamlit as st
+# ollama/ollama_app.py
 import networkx as nx
 import matplotlib.pyplot as plt
-from ollama import Ollama
-
-# Inicializar o modelo LLaMA
-MODEL_PATH = "path/to/llama-3.1.GGUF"
-ollama = Ollama(model_path=MODEL_PATH)
-
-def generate_text(prompt):
-    try:
-        response = ollama.generate(prompt, max_tokens=50)
-        return response['text']
-    except Exception as e:
-        st.error(f"Erro ao gerar texto: {e}")
-        return ""
-
-def create_directional_graph(nodes, edges):
-    G = nx.DiGraph()
-    G.add_nodes_from(nodes)
-    G.add_edges_from(edges)
-    return G
 
 def visualize_graph(G):
+    """
+    Visualize a graph using matplotlib.
+
+    Args:
+        G: A NetworkX graph object.
+    """
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True, node_color='skyblue', node_size=1500, edge_cmap=plt.cm.Blues)
+    plt.show()
+
+# Rest of your code in ollama_app.py
